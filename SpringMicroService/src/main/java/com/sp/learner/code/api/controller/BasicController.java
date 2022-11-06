@@ -19,5 +19,16 @@ public class BasicController {
 		return new ResponseEntity<Map>(m, HttpStatus.OK);
 	}
 	
+	@GetMapping(path="/getallusers")
+	public ResponseEntity<UserModel> getAllUsers()
+	{
+		UserModel u = new UserModel();
+		u.setUserid(1);
+		u.setUsername("Ganesha");
+		
+		return new ResponseEntity<UserModel>(u, HttpStatus.OK);
+	}
+	
+
 	
 }
