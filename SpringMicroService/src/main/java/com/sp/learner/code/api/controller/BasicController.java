@@ -31,6 +31,14 @@ public class BasicController {
 		return new ResponseEntity<Map>(m, HttpStatus.OK);
 	}
 	
+	@GetMapping(path = "throwexception")
+	public String throwException()
+	{
+		int i = 5/0;
+		System.out.println(i);
+		return "OK";
+	}
+	
 	@GetMapping(path="/users")
 	public ResponseEntity<ArrayList> getAllUsers()
 	{
