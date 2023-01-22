@@ -24,11 +24,19 @@ public class BasicController {
 	ArrayList<UserModel> users = new ArrayList<>();
 	
 	@GetMapping
-	public ResponseEntity<Map> index()
+	public ResponseEntity<Map<String,String>> index()
 	{
-		Map m = new HashMap<String,String>();
+		Map<String,String> m = new HashMap<String,String>();
 		m.put("Name", "Ganesha");
-		return new ResponseEntity<Map>(m, HttpStatus.OK);
+		return new ResponseEntity<Map<String,String>>(m, HttpStatus.OK);
+	}
+	
+	@GetMapping(path="/receive")
+	public ResponseEntity<Map> handleoptional(@RequestParam(value ="field", defaultValue = "nothing", required = false ) String field)
+	{
+		Map data = new HashMap<>();
+		data.put("received", field);
+		return new ResponseEntity<Map>(data, HttpStatus.OK);
 	}
 	
 	@GetMapping(path = "throwexception")
@@ -56,9 +64,6 @@ public class BasicController {
 	@PostMapping(path="/push/user", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<UserModel> pushUser(@Valid @RequestBody UserModel user)
 	{
-		System.out.println(user.getUsername());
-		System.out.println(user.getUserid());
-		
 		users.add(user);
 		return new ResponseEntity<UserModel>(user, HttpStatus.OK);
 	}
