@@ -11,7 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 @ControllerAdvice
 public class EntityExceptionHandler {
 
-@ExceptionHandler(value = { Exception.class })
+//@ExceptionHandler(value = { Exception.class })
 public ResponseEntity<Object> handleAnyException(Exception ex, WebRequest request) {
         return new ResponseEntity<>(
           "Err message : "+ex.getMessage(), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
