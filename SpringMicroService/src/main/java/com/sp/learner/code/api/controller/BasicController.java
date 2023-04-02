@@ -9,6 +9,8 @@ import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +38,10 @@ public class BasicController {
 	{
 		Map data = new HashMap<>();
 		data.put("received", field);
-		return new ResponseEntity<Map>(data, HttpStatus.OK);
+		MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+		map.add("sample_header", "sample_header_value");
+		return new ResponseEntity<Map>(data, map, HttpStatus.OK);
+		//return new ResponseEntity<Map>(data, HttpStatus.OK);
 	}
 	
 	@GetMapping(path = "throwexception")
